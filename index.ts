@@ -25,6 +25,10 @@ type TestApi = ApiDefinition<{
       }
     }
     get: {
+      query: {
+        first: string,
+        second: number
+      }
       result: number
     }
   }
@@ -43,6 +47,6 @@ export const Implementation: ApiImplementation<TestApi> = {
   },
   base: {
     post: ({test}) => test,
-    get: () => 43
+    get: ({first, second}) => first.length + second
   }
 }

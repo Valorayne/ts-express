@@ -21,6 +21,13 @@ export type EndpointResult<
   //@ts-ignore
 > = A[R][V]["result"] extends infer Result ? Result : never
 
+export type EndpointQuery<
+  A extends Api,
+  R extends Route<A>,
+  V extends EndpointVerb<A, R>
+  //@ts-ignore
+> = A[R][V] extends { query: infer Query } ? Query : undefined
+
 export type EndpointBody<
   A extends Api,
   R extends Route<A>,

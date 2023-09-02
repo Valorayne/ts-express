@@ -5,11 +5,10 @@ export type Api = {
   }>
 }
 
-export type EndpointDefinition<V extends HttpVerb> = V extends "post" | "patch" | "put" ? {
-  result: any,
-  body: Record<string, unknown>
-} : {
+export type EndpointDefinition<V extends HttpVerb> = {
   result: any
+  query?: Record<string, unknown>
+  body?: V extends "post" | "patch" | "put" ? Record<string, unknown> : never
 }
 
 export type ApiDefinition<T extends Api> = T
