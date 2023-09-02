@@ -12,10 +12,10 @@ export type ApiImplementation<A extends Api> = {
 }
 
 type EndpointHandler<Params, Body, Result> = {} extends Params
-  ? Body extends never
+  ? Body extends undefined
     ? () => Result
     : (body: Body) => Result
-  : Body extends never
+  : Body extends undefined
     ? (params: Params) => Result
     : (params: Params, body: Body) => Result
 

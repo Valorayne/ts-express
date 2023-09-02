@@ -26,4 +26,4 @@ export type EndpointBody<
   R extends Route<A>,
   V extends EndpointVerb<A, R>
   //@ts-ignore
-> = A[R][V]["body"] extends infer Body ? Body : never
+> = A[R][V] extends { body: infer Body } ? Body : undefined

@@ -1,6 +1,6 @@
-import {ApiImplementation, Endpoint} from "./types";
+import {ApiDefinition, ApiImplementation, Endpoint} from "./types";
 
-type TestApi = {
+type TestApi = ApiDefinition<{
   "/numbers/:numberId": {
     get: {
       result: number
@@ -24,10 +24,13 @@ type TestApi = {
         test: string
       }
     }
+    get: {
+      result: number
+    }
   }
-}
+}>
 
-const getNumbersHandler: Endpoint<TestApi, "/numbers/:numberId", "get"> = ({}) => 42
+const getNumbersHandler: Endpoint<TestApi, "/numbers/:numberId", "get"> = ({numberId}) => 42
 
 export const Implementation: ApiImplementation<TestApi> = {
   "/numbers/:numberId": {
@@ -36,9 +39,10 @@ export const Implementation: ApiImplementation<TestApi> = {
     }
   },
   "/strings/:stringId": {
-    get: () => ""
+    get: ({stringId}) => stringId
   },
   base: {
-    post: ({test}) => test
+    post: ({test}) => test,
+    get: () => 43
   }
 }
